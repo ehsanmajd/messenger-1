@@ -3,6 +3,254 @@
   <head>
     <meta charset="utf-8" />
     <style type="text/css">
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+          "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+          "Helvetica Neue", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      code {
+        font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+          monospace;
+      }
+      .titleBar_pointer__2h-7w {
+        cursor: pointer;
+      }
+      .titleBar_title-bar__3W5uP {
+        height: 59px;
+        background-color: #ededed;
+        width: 100%;
+        display: flex;
+      }
+      .titleBar_title-bar__3W5uP > .titleBar_first__PIBdf,
+      .titleBar_title-bar__3W5uP > .titleBar_last__2vQ77 {
+        width: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+      .titleBar_title-bar__3W5uP > .titleBar_middle__220jH {
+        flex: 1 1;
+      }
+      .appStatus_pointer__1vehB {
+        cursor: pointer;
+      }
+      .appStatus_search-text__3Fr_f {
+        width: 100%;
+        border-radius: 2px;
+        height: 80%;
+        border: none;
+        background-color: #ededed;
+        outline: none;
+        font-size: 1.25rem;
+      }
+      .appStatus_search-text__3Fr_f:focus {
+        border: none;
+        outline: none;
+      }
+      .appStatus_app-title__3Wu5j {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+      .avatar__avatar__oTaCM {
+        display: inline;
+      }
+      .avatar__avatar__oTaCM > img {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+      }
+      .listItem_pointer__2SBx6 {
+        cursor: pointer;
+      }
+      .listItem_list-item__1mnZB {
+        border: none;
+        border-top: 1px solid #ccc;
+        width: 100%;
+        height: 80px;
+        cursor: pointer;
+        display: grid;
+        background-color: #fff;
+        grid-template-columns: 80px auto 50px;
+        grid-template-rows: auto;
+        grid-template-areas: "avatar name time" "avatar message info";
+      }
+      .listItem_list-item__1mnZB:last-child {
+        border-bottom: 1px solid #ccc;
+      }
+      .listItem_list-item__1mnZB:hover {
+        background-color: #ccc;
+        transition: background-color 1s;
+      }
+      .listItem_list-item__1mnZB.listItem_selected__3Q6PN {
+        background-color: #eee;
+      }
+      .listItem_list-item__1mnZB .listItem_avatar__FkMqU,
+      .listItem_list-item__1mnZB .listItem_info__3vSL0,
+      .listItem_list-item__1mnZB .listItem_message__3ZiRE,
+      .listItem_list-item__1mnZB .listItem_name__2wTlg,
+      .listItem_list-item__1mnZB .listItem_time__3-xft {
+        display: flex;
+        align-items: center;
+      }
+      .listItem_list-item__1mnZB .listItem_avatar__FkMqU,
+      .listItem_list-item__1mnZB .listItem_info__3vSL0,
+      .listItem_list-item__1mnZB .listItem_time__3-xft {
+        justify-content: center;
+      }
+      .listItem_list-item__1mnZB .listItem_message__3ZiRE {
+        grid-area: message;
+        padding-left: 10px;
+        font-size: 0.9em;
+        align-items: flex-start;
+      }
+      .listItem_list-item__1mnZB .listItem_avatar__FkMqU {
+        grid-area: avatar;
+      }
+      .listItem_list-item__1mnZB .listItem_name__2wTlg {
+        grid-area: name;
+        font-size: 1.2em;
+        align-items: flex-end;
+        padding-left: 5px;
+        font-weight: 700;
+      }
+      .listItem_list-item__1mnZB .listItem_info__3vSL0 {
+        grid-area: info;
+      }
+      .listItem_list-item__1mnZB .listItem_info__3vSL0 > div {
+        background-color: #ccc;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .listItem_list-item__1mnZB .listItem_time__3-xft {
+        grid-area: time;
+        color: #9c9c9c;
+      }
+      .list_pointer__3x6j- {
+        cursor: pointer;
+      }
+      .list_list__WxcsG {
+        height: calc(100% - 58px);
+        overflow-y: auto;
+      }
+      .chatDetail_pointer__1gYpZ {
+        cursor: pointer;
+      }
+      .chatDetail_name__LVfMo {
+        margin-left: 10px;
+      }
+      .chatDetail_app-title__1xgvb {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+      .chatDetail_chat-box__3peJu {
+        width: 100%;
+        height: calc(100% - 58px);
+        background-color: #f7f8f6;
+        display: flex;
+        flex-direction: column;
+      }
+      .chatDetail_chat-box__3peJu .chatDetail_messages-panel__3aOw8 {
+        flex: 1 1;
+        display: flex;
+        flex-direction: column;
+        list-style-type: none;
+        overflow-y: auto;
+        padding: 0 25px;
+        margin-top: 5px;
+      }
+      .chatDetail_chat-box__3peJu .chatDetail_messages-panel__3aOw8 > li {
+        box-sizing: border-box;
+        padding: 7px;
+        margin-bottom: 10px;
+        width: 35%;
+        border: 1px solid #ccc;
+        background-color: #f5f5f5;
+        border-radius: 5px;
+      }
+      .chatDetail_chat-box__3peJu
+        .chatDetail_messages-panel__3aOw8
+        > li.chatDetail_me__2ZOxv {
+        align-self: flex-end;
+        background-color: #9acd32;
+      }
+      .chatDetail_chat-box__3peJu .chatDetail_input-section__2qoiR {
+        width: 100%;
+        margin: 0 auto;
+        background-color: #ededed;
+        height: 3.5rem;
+        display: flex;
+      }
+      .chatDetail_chat-box__3peJu .chatDetail_input-section__2qoiR > input {
+        width: 95%;
+        flex: 1 1;
+        margin-left: 20px;
+        font-size: 1rem;
+        height: 2rem;
+        align-self: center;
+        outline: none;
+        border: none;
+        border-radius: 10px;
+      }
+      .chatDetail_chat-box__3peJu
+        .chatDetail_input-section__2qoiR
+        > input
+        :focus {
+        outline: none;
+      }
+      .chatDetail_chat-box__3peJu
+        .chatDetail_input-section__2qoiR
+        > .chatDetail_send__1Gwlf {
+        width: 60px;
+        align-self: center;
+        justify-self: center;
+      }
+      .chat_pointer__1TTRt {
+        cursor: pointer;
+      }
+      .chat_layout__2YPVn {
+        display: grid;
+        grid-template-columns: 35% 1fr;
+        grid-template-rows: calc(100vh - 70px);
+        border: 1px solid #ccc;
+        overflow-y: hidden;
+      }
+      .chat_side__2kvyI {
+        border-right: 2px solid #ccc;
+      }
+      .app_pointer__-lGt- {
+        cursor: pointer;
+      }
+      .app_app__3mk8F .app_head__1Nu6Y {
+        width: 100%;
+        height: 127px;
+        position: fixed;
+        z-index: -1;
+        background-color: #009588;
+      }
+      .app_app__3mk8F > .app_main__1NOZK {
+        padding-top: 35px;
+        max-width: 1366px;
+        margin: 0 auto;
+      }
+      /*# sourceMappingURL=main.8b897d50.chunk.css.map */
+
       svg:not(:root).svg-inline--fa {
         overflow: visible;
       }
@@ -495,7 +743,6 @@
     <title>Massenger</title>
   </head>
 
-  <title>React App</title>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
