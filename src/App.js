@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import ChatBox from "./Components/ChatBox";
+import SearchBar from "./Components/SearchBar";
+import UsersList from "./Components/UsersList";
 
 function App() {
   const [fakeUser, setFakeUser] = useState({
@@ -14,8 +16,17 @@ function App() {
     ],
   });
   return (
-    <div>
-      <ChatBox fakeUser={fakeUser} />
+    <div className="app_app__3mk8F">
+      <div className="app_head__1Nu6Y"></div>
+      <div className="app_main__1NOZK">
+        <div className="chat_layout__2YPVn">
+          <div className="chat_side__2kvyI">
+            <SearchBar />
+            <UsersList />
+          </div>
+          <ChatBox fakeUser={fakeUser} />
+        </div>
+      </div>
     </div>
   );
 }
