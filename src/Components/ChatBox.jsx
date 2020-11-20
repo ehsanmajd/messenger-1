@@ -3,17 +3,17 @@ import ChatInput from "./ChatInput";
 import ChatItem from "./ChatItem";
 import ChatMapper from "./ChatMapper";
 
-function ChatBox({ fakeUser }) {
+function ChatBox({ user, users, handleUserClick }) {
   return (
     <div>
-      <div class="titleBar_title-bar__3W5uP">
-        <div class="titleBar_first__PIBdf">
+      <div className="titleBar_title-bar__3W5uP">
+        <div className="titleBar_first__PIBdf">
           <svg
             aria-hidden="true"
             focusable="false"
             data-prefix="fas"
             data-icon="times"
-            class="svg-inline--fa fa-times fa-w-11 fa-lg pointer"
+            className="svg-inline--fa fa-times fa-w-11 fa-lg pointer"
             role="img"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 352 512"
@@ -25,21 +25,21 @@ function ChatBox({ fakeUser }) {
             ></path>
           </svg>
         </div>
-        <div class="titleBar_middle__220jH">
-          <div class="chatDetail_app-title__1xgvb">
-            <div class="avatar__avatar__oTaCM">
+        <div className="titleBar_middle__220jH">
+          <div className="chatDetail_app-title__1xgvb">
+            <div className="avatar__avatar__oTaCM">
               <img src="/avatar.png" alt="Zahra" />
             </div>
-            <div class="chatDetail_name__LVfMo">Zahra</div>
+            <div className="chatDetail_name__LVfMo">Zahra</div>
           </div>
         </div>
-        <div class="titleBar_last__2vQ77">
+        <div className="titleBar_last__2vQ77">
           <svg
             aria-hidden="true"
             focusable="false"
             data-prefix="fas"
             data-icon="ellipsis-v"
-            class="svg-inline--fa fa-ellipsis-v fa-w-6 fa-lg pointer"
+            className="svg-inline--fa fa-ellipsis-v fa-w-6 fa-lg pointer"
             role="img"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 192 512"
@@ -54,7 +54,7 @@ function ChatBox({ fakeUser }) {
       </div>
       <div className="chatDetail_chat-box__3peJu">
         <ul className="chatDetail_messages-panel__3aOw8">
-          <ChatMapper fakeUser={fakeUser} />
+          <ChatMapper handleUserClick={handleUserClick} user={user} />
           <ChatItem that={"hi there"} />
           <ChatItem user={"my chat"} />
         </ul>

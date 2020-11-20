@@ -3,14 +3,14 @@ import React from "react";
 function SearchBar() {
   return (
     <div>
-      <div class="titleBar_title-bar__3W5uP">
-        <div class="titleBar_first__PIBdf">
+      <div className="titleBar_title-bar__3W5uP">
+        <div className="titleBar_first__PIBdf">
           <svg
             aria-hidden="true"
             focusable="false"
             data-prefix="fas"
             data-icon="bars"
-            class="svg-inline--fa fa-bars fa-w-14 fa-lg appStatus_pointer__1vehB"
+            className="svg-inline--fa fa-bars fa-w-14 fa-lg appStatus_pointer__1vehB"
             role="img"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 448 512"
@@ -22,16 +22,16 @@ function SearchBar() {
             ></path>
           </svg>
         </div>
-        <div class="titleBar_middle__220jH">
-          <div class="appStatus_app-title__3Wu5j">Fancy Messenger</div>
+        <div className="titleBar_middle__220jH">
+          <div className="appStatus_app-title__3Wu5j">Fancy Messenger</div>
         </div>
-        <div class="titleBar_last__2vQ77">
+        <div className="titleBar_last__2vQ77">
           <svg
             aria-hidden="true"
             focusable="false"
             data-prefix="fas"
             data-icon="search"
-            class="svg-inline--fa fa-search fa-w-16 fa-lg appStatus_pointer__1vehB"
+            className="svg-inline--fa fa-search fa-w-16 fa-lg appStatus_pointer__1vehB"
             role="img"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"

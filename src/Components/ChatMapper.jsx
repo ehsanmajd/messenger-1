@@ -1,11 +1,16 @@
 import React from "react";
 import ChatItem from "./ChatItem";
 
-function ChatMapper({ fakeUser }) {
-  const mappedChat = fakeUser.chats.map((chat) => (
-    <ChatItem user={chat.text} key={chat.chatId} />
-  ));
-  return <>{mappedChat}</>;
+function ChatMapper({ user }) {
+  if (user.length > 0) {
+    console.log(user[0].chats);
+    const mappedChat = user[0].chats.map((chat, index) => (
+      <ChatItem user={chat.text} key={index} />
+    ));
+    console.log(mappedChat);
+    return <>{mappedChat}</>;
+  }
+  return true;
 }
 
 export default ChatMapper;
