@@ -1,48 +1,32 @@
 import React, { useState } from "react";
+
+import { getUser, getList, chatUpdate } from "./server";
+
 import ChatBox from "./Components/ChatBox";
 import SearchBar from "./Components/SearchBar";
-import UsersList from "./Components/UsersLists";
+import UserList from "./Components/UserList";
 
 function App() {
-  const [users, setUsers] = useState([
-    {
-      avatar: "./05-4K.jpg",
-      alt: "user1",
-      username: "user1",
-      lastChatText: "lastChatText",
-      lastChatTime: Date.now().toString(),
-      unreadChatCounter: 10,
-      userId: 1,
-      chats: [{ title: "third", text: "cc345", chatId: 3 }],
-    },
-    {
-      avatar: "./05-4K.jpg",
-      alt: "user3",
-      username: "user3",
-      lastChatText: "lastChatText",
-      lastChatTime: Date.now().toString(),
-      unreadChatCounter: 4,
-      userId: 3,
-      chats: [{ title: "sec", text: "bb234", chatId: 2 }],
-    },
-    {
-      avatar: "./05-4K.jpg",
-      alt: "user2",
-      username: "user2",
-      lastChatText: "lastChatText",
-      lastChatTime: Date.now().toString(),
-      unreadChatCounter: 6,
-      userId: 2,
-      chats: [{ title: "first", text: "aa123", chatId: 1 }],
-    },
-  ]);
+  const [chatContent, setChatContent] = useState("");
+
+  const handleChangeInput = (e) => {
+    setChatContent(e.target.value);
+  };
   const [user, setUser] = useState([]);
 
   function handleUserClick(userId) {
     console.log("userID:", userId);
-    const user = users.filter((user) => user.userId === userId);
-    setUser(user);
+    setUser(getUser(userId));
   }
+  const handleCloseChat = () => {
+    setUser([]);
+  };
+
+  const handleAddChat = () => {
+    chatUpdate(user.userId, chatContent);
+    setChatContent("");
+  };
+
   return (
     <div className="app_app__3mk8F">
       <div className="app_head__1Nu6Y"></div>
@@ -50,12 +34,14 @@ function App() {
         <div className="chat_layout__2YPVn">
           <div className="chat_side__2kvyI">
             <SearchBar />
-            <UsersList handleUserClick={handleUserClick} users={users} />
+            <UserList handleUserClick={handleUserClick} users={getList()} />
           </div>
           <ChatBox
+            handleAddChat={handleAddChat}
+            chatContent={chatContent}
             user={user}
-            handleUserClick={handleUserClick}
-            users={users}
+            handleChangeInput={handleChangeInput}
+            handleCloseChat={handleCloseChat}
           />
         </div>
       </div>
