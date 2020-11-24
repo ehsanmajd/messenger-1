@@ -7,7 +7,6 @@ function ChatMapper({ user }) {
     const mappedChat = user[0].chats.map((chat, index) => (
       <ChatItem user={chat.text} key={index} />
     ));
-    console.log(mappedChat);
     return <>{mappedChat}</>;
   }
   return true;
