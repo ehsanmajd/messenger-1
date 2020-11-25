@@ -22,9 +22,16 @@ export function getList() {
 
 export function chatUpdate(userId, chatContent) {
   const user = getUser(userId);
-  user.lastChatTime = getTime();
+  const chatTime = getTime();
+  const chatDate = getDate();
+  user.lastChatTime = chatTime;
   user.lastChatText = chatContent;
-  user.chats.push({ me: chatContent, chatId: Math.random() });
+  user.chats.push({
+    me: chatContent,
+    chatTime: chatTime,
+    chatDate: chatDate,
+    chatId: Math.random(),
+  });
 }
 
 export function getDate() {
