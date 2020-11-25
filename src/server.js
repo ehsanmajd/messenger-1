@@ -2,7 +2,6 @@ import { userRepository } from "./userRepository";
 
 export function getUser(userId) {
   const user = userRepository.users.find((user) => user.userId === userId);
-  console.log(user);
   if (user.unreadChatCounter) {
     user.unreadChatCounter = "";
   }

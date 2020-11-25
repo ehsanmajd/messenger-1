@@ -10,7 +10,6 @@ function UserListItem({
   lastChatTime,
   unreadChatCounter,
 }) {
-  console.log(personName);
   return (
     <>
       <div

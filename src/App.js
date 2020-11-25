@@ -15,7 +15,6 @@ function App() {
   const [user, setUser] = useState([]);
 
   function handleUserClick(userId) {
-    console.log("userID:", userId);
     setUser(getUser(userId));
   }
   const handleCloseChat = () => {
