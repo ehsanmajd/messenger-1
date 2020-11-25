@@ -1,24 +1,24 @@
 import React from "react";
 
 function UserListItem({
-  handleUserClick,
   userId,
   avatar,
-  alt,
   personName,
   lastChatText,
   lastChatTime,
+  // lastChatDate,
   unreadChatCounter,
+  onUserClick,
 }) {
   return (
     <>
       <div
         className="listItem_list-item__1mnZB"
-        onClick={() => handleUserClick(userId)}
+        onClick={() => onUserClick(userId)}
       >
         <div className="listItem_avatar__FkMqU">
           <div className="avatar__avatar__oTaCM">
-            <img src={avatar} alt={alt} />
+            <img src={avatar} alt={personName} />
           </div>
         </div>
         <div className="listItem_name__2wTlg">{personName}</div>

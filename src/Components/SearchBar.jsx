@@ -1,5 +1,6 @@
 import React from "react";
 
+// nothing yet ...
 function SearchBar() {
   return (
     <div>

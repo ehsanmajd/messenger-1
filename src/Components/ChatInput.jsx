@@ -1,20 +1,14 @@
 import React from "react";
 
-function ChatInput({ chatContent, handleAddChat, handleChangeInput }) {
-  function handleKeyPress(e) {
-    if (chatContent && e.key === "Enter") {
-      handleAddChat();
-    }
-  }
-
+function ChatInput({ chatContent, onAddChat, onKeyPress, onChangeInput }) {
   return (
     <div>
       <div className="chatDetail_input-section__2qoiR">
         <input
           type="text"
           value={chatContent}
-          onKeyPress={handleKeyPress}
-          onChange={handleChangeInput}
+          onKeyPress={onKeyPress}
+          onChange={onChangeInput}
         />
         <svg
           aria-hidden="true"
@@ -26,7 +20,7 @@ function ChatInput({ chatContent, handleAddChat, handleChangeInput }) {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 448 512"
           color="#009588"
-          onClick={handleAddChat}
+          onClick={onAddChat}
         >
           <path
             fill="currentColor"

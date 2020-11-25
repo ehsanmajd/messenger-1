@@ -1,25 +1,26 @@
 import React from "react";
 
 import UserListItem from "./UserListItem";
-function UserList({ users, handleUserClick }) {
-  const Lists = users.map((user) => {
+
+function UserList({ userList, onUserClick }) {
+  const list = userList.map((user) => {
     return (
       <UserListItem
         key={user.userId}
         userId={user.userId}
         avatar={user.avatar}
-        alt={user.alt}
         personName={user.personName}
         lastChatText={user.lastChatText}
         lastChatTime={user.lastChatTime}
-        handleUserClick={handleUserClick}
+        // lastChatDate={user.lastChatDate}
         unreadChatCounter={user.unreadChatCounter}
+        onUserClick={onUserClick}
       />
     );
   });
   return (
     <>
-      <div className="list_list__WxcsG">{Lists}</div>
+      <div className="list_list__WxcsG">{list}</div>
     </>
   );
 }

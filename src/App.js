@@ -2,29 +2,38 @@ import React, { useState } from "react";
 
 import { getUser, getList, chatUpdate } from "./server";
 
-import ChatBox from "./Components/ChatBox";
 import SearchBar from "./Components/SearchBar";
 import UserList from "./Components/UserList";
+import ChatBox from "./Components/ChatBox";
 
 function App() {
   const [chatContent, setChatContent] = useState("");
+  const [user, setUser] = useState(null);
 
-  const handleChangeInput = (e) => {
-    setChatContent(e.target.value);
-  };
-  const [user, setUser] = useState([]);
-
-  function handleUserClick(userId) {
-    setUser(getUser(userId));
-  }
-  const handleCloseChat = () => {
-    setUser([]);
-  };
-
-  const handleAddChat = () => {
+  function handleAddChat() {
     chatUpdate(user.userId, chatContent);
     setChatContent("");
-  };
+  }
+
+  function handleKeyPress(e) {
+    if (chatContent && e.key === "Enter") {
+      handleAddChat();
+    }
+  }
+
+  function handleChangeInput(e) {
+    setChatContent(e.target.value);
+  }
+
+  function handleUserClick(userId) {
+    setChatContent("");
+    setUser(getUser(userId));
+  }
+  //TODO fix chatContent
+  function handleCloseChat() {
+    setChatContent("");
+    setUser(null);
+  }
 
   return (
     <div className="app_app__3mk8F">
@@ -33,14 +42,15 @@ function App() {
         <div className="chat_layout__2YPVn">
           <div className="chat_side__2kvyI">
             <SearchBar />
-            <UserList handleUserClick={handleUserClick} users={getList()} />
+            <UserList userList={getList()} onUserClick={handleUserClick} />
           </div>
           <ChatBox
-            handleAddChat={handleAddChat}
-            chatContent={chatContent}
             user={user}
-            handleChangeInput={handleChangeInput}
-            handleCloseChat={handleCloseChat}
+            chatContent={chatContent}
+            onAddChat={handleAddChat}
+            onKeyPress={handleKeyPress}
+            onChangeInput={handleChangeInput}
+            onCloseChat={handleCloseChat}
           />
         </div>
       </div>

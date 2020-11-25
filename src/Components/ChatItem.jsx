@@ -1,6 +1,7 @@
 import React from "react";
 
-function chatItem({ me, chatDate, person, chatTime }) {
+function chatItem({ me, person, chatDate, chatTime }) {
+  // message className from Haleh .
   return (
     <>
       {me && (
@@ -10,7 +11,7 @@ function chatItem({ me, chatDate, person, chatTime }) {
               <li className="chatDetail_me__2ZOxv">{me}</li>
             </div>
             <div className="message-time">
-              <span>{chatTime}</span> {chatDate}
+              {chatDate} {chatTime}
             </div>
           </div>
         </div>
@@ -27,7 +28,7 @@ function chatItem({ me, chatDate, person, chatTime }) {
             {person}
           </li>
           <div className="message-time">
-            <span>{chatTime}</span> {chatDate}
+            {chatTime} {chatDate}
           </div>
         </>
       )}

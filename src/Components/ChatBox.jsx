@@ -1,22 +1,24 @@
 import React from "react";
+
 import ChatInput from "./ChatInput";
 import ChatMapper from "./ChatMapper";
 
 function ChatBox({
   user,
-  handleCloseChat,
   chatContent,
-  handleAddChat,
-  handleChangeInput,
+  onAddChat,
+  onKeyPress,
+  onChangeInput,
+  onCloseChat,
 }) {
   return (
     <div>
-      {user.length !== 0 && (
+      {user && (
         <>
           <div className="titleBar_title-bar__3W5uP">
             <div className="titleBar_first__PIBdf">
               <svg
-                onClick={handleCloseChat}
+                onClick={onCloseChat}
                 aria-hidden="true"
                 focusable="false"
                 data-prefix="fas"
@@ -68,9 +70,10 @@ function ChatBox({
               <ChatMapper user={user} />
             </ul>
             <ChatInput
-              handleAddChat={handleAddChat}
               chatContent={chatContent}
-              handleChangeInput={handleChangeInput}
+              onAddChat={onAddChat}
+              onKeyPress={onKeyPress}
+              onChangeInput={onChangeInput}
             />
           </div>
         </>
