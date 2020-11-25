@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { getUser, getList, chatUpdate, getDate, getTime } from "./server";
+import { getUser, getList, chatUpdate } from "./server";
 
 import ChatBox from "./Components/ChatBox";
 import SearchBar from "./Components/SearchBar";
@@ -17,7 +17,6 @@ function App() {
   function handleUserClick(userId) {
     console.log("userID:", userId);
     setUser(getUser(userId));
-    user;
   }
   const handleCloseChat = () => {
     setUser([]);
