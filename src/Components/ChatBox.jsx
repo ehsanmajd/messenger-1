@@ -36,9 +36,9 @@ function ChatBox({
             <div className="titleBar_middle__220jH">
               <div className="chatDetail_app-title__1xgvb">
                 <div className="avatar__avatar__oTaCM">
-                  <img src="/avatar.png" alt={user.username} />
+                  <img src={user.avatar} alt={user.personName} />
                 </div>
-                <div className="chatDetail_name__LVfMo">{user.username}</div>
+                <div className="chatDetail_name__LVfMo">{user.personName}</div>
               </div>
             </div>
             <div className="titleBar_last__2vQ77">
@@ -60,11 +60,12 @@ function ChatBox({
               </svg>
             </div>
           </div>
-          <div className="chatDetail_chat-box__3peJu">
+          <div
+            style={{ backgroundColor: "lighcyan" }}
+            className="chatDetail_chat-box__3peJu"
+          >
             <ul className="chatDetail_messages-panel__3aOw8">
               <ChatMapper user={user} />
-              {/* <ChatItem that={"hi there"} />
-              <ChatItem user={"my chat"} /> */}
             </ul>
             <ChatInput
               handleAddChat={handleAddChat}

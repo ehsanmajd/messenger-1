@@ -5,11 +5,12 @@ function UserListItem({
   userId,
   avatar,
   alt,
-  userName,
+  personName,
   lastChatText,
   lastChatTime,
   unreadChatCounter,
 }) {
+  console.log(personName);
   return (
     <>
       <div
@@ -21,7 +22,7 @@ function UserListItem({
             <img src={avatar} alt={alt} />
           </div>
         </div>
-        <div className="listItem_name__2wTlg">{userName}</div>
+        <div className="listItem_name__2wTlg">{personName}</div>
         <div className="listItem_message__3ZiRE">{lastChatText}</div>
         <div className="listItem_time__3-xft">{lastChatTime}</div>
         <div className="listItem_info__3vSL0">

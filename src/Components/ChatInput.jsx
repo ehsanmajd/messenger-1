@@ -1,11 +1,21 @@
 import React from "react";
 
 function ChatInput({ chatContent, handleAddChat, handleChangeInput }) {
-  console.log(chatContent);
+  function handleKeyPress(e) {
+    if (chatContent && e.key === "Enter") {
+      handleAddChat();
+    }
+  }
+
   return (
     <div>
       <div className="chatDetail_input-section__2qoiR">
-        <input type="text" value={chatContent} onChange={handleChangeInput} />
+        <input
+          type="text"
+          value={chatContent}
+          onKeyPress={handleKeyPress}
+          onChange={handleChangeInput}
+        />
         <svg
           aria-hidden="true"
           focusable="false"

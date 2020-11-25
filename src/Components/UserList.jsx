@@ -9,7 +9,7 @@ function UserList({ users, handleUserClick }) {
         userId={user.userId}
         avatar={user.avatar}
         alt={user.alt}
-        userName={user.username}
+        personName={user.personName}
         lastChatText={user.lastChatText}
         lastChatTime={user.lastChatTime}
         handleUserClick={handleUserClick}

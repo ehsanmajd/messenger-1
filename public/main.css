@@ -1,3 +1,19 @@
-/* .hoverClose:hover {
-  cursor: pointer;
-} */
+.you-message .message-content {
+  justify-items: end;
+}
+
+.message-content {
+  display: grid;
+}
+.you-message .message-text {
+  background: #ecf3de;
+  color: #000000;
+  border: 1px solid #9acd32;
+  border-radius: 14px 14px 0 14px;
+}
+
+.message-text {
+  padding: 9px 14px;
+  font-size: 1.6rem;
+  margin-bottom: 5px;
+}
