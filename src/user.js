@@ -1,6 +1,6 @@
 // class user {
 //   constructor(avatar, personName, lastChatText, unreadChatCounter) {
-//     this.userId = Math.random();
+//     this.personId = Math.random();
 //     this.avatar = avatar;
 //     this.personName = personName;
 //     this.lastChatText = lastChatText;

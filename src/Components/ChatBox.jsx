@@ -4,7 +4,7 @@ import ChatInput from "./ChatInput";
 import ChatMapper from "./ChatMapper";
 
 function ChatBox({
-  user,
+  selectedperson,
   chatContent,
   onAddChat,
   onKeyPress,
@@ -13,7 +13,7 @@ function ChatBox({
 }) {
   return (
     <div>
-      {user && (
+      {selectedperson && (
         <>
           <div className="titleBar_title-bar__3W5uP">
             <div className="titleBar_first__PIBdf">
@@ -38,9 +38,14 @@ function ChatBox({
             <div className="titleBar_middle__220jH">
               <div className="chatDetail_app-title__1xgvb">
                 <div className="avatar__avatar__oTaCM">
-                  <img src={user.avatar} alt={user.personName} />
+                  <img
+                    src={selectedperson.avatar}
+                    alt={selectedperson.personName}
+                  />
                 </div>
-                <div className="chatDetail_name__LVfMo">{user.personName}</div>
+                <div className="chatDetail_name__LVfMo">
+                  {selectedperson.personName}
+                </div>
               </div>
             </div>
             <div className="titleBar_last__2vQ77">
@@ -67,7 +72,7 @@ function ChatBox({
             className="chatDetail_chat-box__3peJu"
           >
             <ul className="chatDetail_messages-panel__3aOw8">
-              <ChatMapper user={user} />
+              <ChatMapper selectedperson={selectedperson} />
             </ul>
             <ChatInput
               chatContent={chatContent}

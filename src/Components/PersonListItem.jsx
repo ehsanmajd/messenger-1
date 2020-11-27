@@ -1,20 +1,20 @@
 import React from "react";
 
-function UserListItem({
-  userId,
+function PersonListItem({
+  personId,
   avatar,
   personName,
   lastChatText,
   lastChatTime,
   // lastChatDate,
   unreadChatCounter,
-  onUserClick,
+  onPersonClick,
 }) {
   return (
     <>
       <div
         className="listItem_list-item__1mnZB"
-        onClick={() => onUserClick(userId)}
+        onClick={() => onPersonClick(personId)}
       >
         <div className="listItem_avatar__FkMqU">
           <div className="avatar__avatar__oTaCM">
@@ -32,4 +32,4 @@ function UserListItem({
   );
 }
 
-export default UserListItem;
+export default PersonListItem;
