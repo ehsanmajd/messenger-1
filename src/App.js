@@ -252,7 +252,7 @@ function App() {
       ],
     },
   ]);
-  const [selectedperson, setPerson] = useState(null);
+  const [selectedPerson, setSelectedPerson] = useState(null);
   const [chatContent, setChatContent] = useState("");
   const [personList, setPersonList] = useState(null);
 
@@ -271,19 +271,21 @@ function App() {
   }, [persons]);
 
   function handleAddChat() {
+    //TODO selectedPerson.chats
     const copiedPersons = [...persons];
+    const person = { ...selectedPerson };
     const index = copiedPersons.findIndex(
-      (person) => person.personId === selectedperson.personId
+      (p) => p.personId === selectedPerson.personId
     );
-    copiedPersons[index].lastChatTime = handleGetTime();
-    copiedPersons[index].lastChatText = chatContent;
-    copiedPersons[index].chats.push({
+    person.lastChatTime = handleGetTime();
+    person.lastChatText = chatContent;
+    person.chats.push({
       me: chatContent,
       chatTime: handleGetTime(),
       chatDate: handleGetDate(),
       chatId: Math.random(),
     });
-    // TODO fix state changing directly : persons
+    copiedPersons.splice(index, 1, person);
     setPersons(copiedPersons);
     setChatContent("");
   }
@@ -303,22 +305,23 @@ function App() {
     const index = copiedPersons.findIndex(
       (person) => person.personId === personId
     );
-    const selectedperson = copiedPersons.find(
-      (person) => person.personId === personId
-    );
-    if (selectedperson.unreadChatCounter) {
-      selectedperson.unreadChatCounter = "";
+    const personFromCopy = {
+      ...copiedPersons.find((person) => person.personId === personId),
+    };
+    if (personFromCopy.unreadChatCounter) {
+      personFromCopy.unreadChatCounter = "";
     }
-    copiedPersons.splice(index, 1, selectedperson);
+    copiedPersons.splice(index, 1, personFromCopy);
 
     setPersons(copiedPersons);
-    setPerson(selectedperson);
+    setSelectedPerson(personFromCopy);
+    //TODO fix chatContent
     setChatContent("");
   }
-  //TODO fix chatContent
+
   function handleCloseChat() {
     setChatContent("");
-    setPerson(null);
+    setSelectedPerson(null);
   }
 
   function handleGetTime() {
@@ -335,6 +338,35 @@ function App() {
     const getDay = dateNow.getDay();
     return `${getMonth + 1}/${getDay + 22}`;
   }
+
+  function handleLastItem(chatId) {}
+
+  function handleDelete(chatId) {
+    handleLastItem(chatId);
+    console.log(chatId);
+    const copiedPersons = [...persons];
+    const person = { ...selectedPerson };
+    const index = copiedPersons.findIndex(
+      (p) => p.personId === selectedPerson.personId
+    );
+    const chatIndex = person.chats.findIndex((chat) => chat.chatId === chatId);
+    // person.lastChatTime = handleGetTime();
+    // person.lastChatText = chatContent;
+    person.chats.splice(chatIndex, 1);
+    copiedPersons.splice(index, 1, person);
+
+    setPersons(copiedPersons);
+    setChatContent("");
+  }
+
+  function handleEdit(chatId) {
+    console.log(chatId);
+  }
+
+  function handleForward(chatId) {
+    console.log(chatId);
+  }
+
   // TODO 2 in 1 time geter
   // function handleTime(timeParams1, timeParams2, timeType) {
   //   const dateNow = new Date(Date.now());
@@ -346,6 +378,7 @@ function App() {
   if (!personList) {
     return "please wait ...";
   }
+
   return (
     <div className="app_app__3mk8F">
       <div className="app_head__1Nu6Y"></div>
@@ -359,12 +392,15 @@ function App() {
             />
           </div>
           <ChatBox
-            selectedperson={selectedperson}
+            selectedPerson={selectedPerson}
             chatContent={chatContent}
             onAddChat={handleAddChat}
             onKeyPress={handleKeyPress}
             onChangeInput={handleChangeInput}
             onCloseChat={handleCloseChat}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
+            onForward={handleForward}
           />
         </div>
       </div>

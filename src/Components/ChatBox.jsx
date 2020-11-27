@@ -4,16 +4,19 @@ import ChatInput from "./ChatInput";
 import ChatMapper from "./ChatMapper";
 
 function ChatBox({
-  selectedperson,
+  selectedPerson,
   chatContent,
   onAddChat,
   onKeyPress,
   onChangeInput,
   onCloseChat,
+  onDelete,
+  onEdit,
+  onForward,
 }) {
   return (
     <div>
-      {selectedperson && (
+      {selectedPerson && (
         <>
           <div className="titleBar_title-bar__3W5uP">
             <div className="titleBar_first__PIBdf">
@@ -39,12 +42,12 @@ function ChatBox({
               <div className="chatDetail_app-title__1xgvb">
                 <div className="avatar__avatar__oTaCM">
                   <img
-                    src={selectedperson.avatar}
-                    alt={selectedperson.personName}
+                    src={selectedPerson.avatar}
+                    alt={selectedPerson.personName}
                   />
                 </div>
                 <div className="chatDetail_name__LVfMo">
-                  {selectedperson.personName}
+                  {selectedPerson.personName}
                 </div>
               </div>
             </div>
@@ -72,7 +75,12 @@ function ChatBox({
             className="chatDetail_chat-box__3peJu"
           >
             <ul className="chatDetail_messages-panel__3aOw8">
-              <ChatMapper selectedperson={selectedperson} />
+              <ChatMapper
+                selectedPerson={selectedPerson}
+                onDelete={onDelete}
+                onEdit={onEdit}
+                onForward={onForward}
+              />
             </ul>
             <ChatInput
               chatContent={chatContent}
