@@ -10,7 +10,7 @@ function ChatMapper({ selectedPerson, onDelete, onEdit, onForward }) {
       person={chat.person} // شخص مقابل
       chatTime={chat.chatTime}
       chatDate={chat.chatDate}
-      onDelete={() => onDelete(chat.chatId)}
+      onDelete={() => onDelete(chat.chatId, selectedPerson.details.personId)}
       onEdit={() => onEdit(chat.chatId)}
       onForward={() => onForward(chat.chatId)}
     />
