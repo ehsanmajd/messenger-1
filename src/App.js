@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import SearchBar from "./Components/SearchBar";
-import PersonList from "./Components/PersonList";
-import ChatBox from "./Components/ChatBox";
+import SearchBar from "./SearchBar";
+import PersonList from "./Components/person/PersonList";
+import ChatBox from "./Components/chat/ChatBox";
 
 function App() {
   const [persons, setPersons] = useState([
@@ -287,19 +287,21 @@ function App() {
   function handleAddChat() {
     //TODO selectedPerson.chats
     const copiedPersons = [...persons];
-    const person = { ...selectedPerson };
+    const details = { ...selectedPerson.details };
+    const chats = [...selectedPerson.chats];
     const index = copiedPersons.findIndex(
-      (p) => p.personId === selectedPerson.personId
+      (p) => p.details.personId === selectedPerson.details.personId
     );
-    person.lastChatTime = handleGetTime();
-    person.lastChatText = chatContent;
-    person.chats.push({
+    details.lastChatTime = handleGetTime();
+    details.lastChatText = chatContent;
+    chats.push({
       me: chatContent,
       chatTime: handleGetTime(),
       chatDate: handleGetDate(),
       chatId: Math.random(),
     });
-    copiedPersons.splice(index, 1, person);
+    copiedPersons.splice(index, 1, { details, chats });
+    setSelectedPerson({ details, chats });
     setPersons(copiedPersons);
     setChatContent("");
   }
@@ -308,6 +310,7 @@ function App() {
     if (chatContent && e.key === "Enter") {
       handleAddChat();
     }
+    //TODO add another keyPress soon...
   }
 
   function handleChangeInput(e) {
@@ -319,18 +322,18 @@ function App() {
     const index = copiedPersons.findIndex(
       (person) => person.details.personId === personId
     );
-    const personFromCopy = {
-      ...copiedPersons.find((person) => person.details.personId === personId),
-    };
-    if (personFromCopy.details.unreadChatCounter) {
-      personFromCopy.details.unreadChatCounter = "";
+    const details = { ...copiedPersons[index].details };
+    const chats = [...copiedPersons[index].chats];
+    if (details.unreadChatCounter) {
+      details.unreadChatCounter = "";
     }
-    copiedPersons.splice(index, 1, personFromCopy);
+    const newPerson = { details, chats };
+    copiedPersons.splice(index, 1, newPerson);
 
+    setSelectedPerson(newPerson);
     setPersons(copiedPersons);
-    setSelectedPerson(personFromCopy);
-    //TODO fix chatContent
     setChatContent("");
+    //TODO fix chatContent
   }
 
   function handleCloseChat() {
@@ -353,47 +356,43 @@ function App() {
     return `${getMonth + 1}/${getDay + 22}`;
   }
 
-  function handleDeleteChat(chatId, personId) {
+  function handleDeleteChat(chatId) {
     let copiedPersons = [...persons];
     const personDetails = { ...selectedPerson.details };
-    const newChat = selectedPerson.chats.filter(
+    const newChats = selectedPerson.chats.filter(
       (chat) => chat.chatId !== chatId
     );
     const personIndex = copiedPersons.findIndex(
       (p) => p.details.personId === selectedPerson.details.personId
     );
-    if (newChat.length) {
-      const chatLastIndex = newChat.length - 1;
-      personDetails.lastChatTime = newChat[chatLastIndex].chatTime;
-      if (newChat[chatLastIndex].me) {
-        personDetails.lastChatText = newChat[chatLastIndex].me;
+    if (newChats.length) {
+      const chatLastIndex = newChats.length - 1;
+      personDetails.lastChatTime = newChats[chatLastIndex].chatTime;
+      if (newChats[chatLastIndex].me) {
+        personDetails.lastChatText = newChats[chatLastIndex].me;
       }
-      if (newChat[chatLastIndex].person) {
-        personDetails.lastChatText = newChat[chatLastIndex].person;
+      if (newChats[chatLastIndex].person) {
+        personDetails.lastChatText = newChats[chatLastIndex].person;
       }
       copiedPersons.splice(personIndex, 1, {
         details: personDetails,
-        chats: newChat,
+        chats: newChats,
       });
-    } else {
-      personDetails.lastChatText = "";
-      personDetails.lastChatTime = "";
+      setSelectedPerson({ details: personDetails, chats: newChats });
+    }
+    if (!newChats.length) {
       copiedPersons.splice(personIndex, 1);
       handleCloseChat();
     }
-    console.log("copiedPersons", copiedPersons);
-    console.log("persons", persons);
-    setPersons(copiedPersons);
     setChatContent("");
+    setPersons(copiedPersons);
   }
 
-  function handleEdit(chatId) {
-    console.log(chatId);
+  function handleEdit(chatId, personId) {
+    console.log("chat id :", chatId, "personId", personId);
   }
 
-  function handleForward(chatId) {
-    console.log(chatId);
-  }
+  function handleForward(chatId) {}
 
   // TODO 2 in 1 time geter
   // function handleTime(timeParams1, timeParams2, timeType) {
@@ -419,17 +418,20 @@ function App() {
               onPersonClick={handlePersonClick}
             />
           </div>
-          <ChatBox
-            selectedPerson={selectedPerson}
-            chatContent={chatContent}
-            onAddChat={handleAddChat}
-            onKeyPress={handleKeyPress}
-            onChangeInput={handleChangeInput}
-            onCloseChat={handleCloseChat}
-            onDelete={handleDeleteChat}
-            onEdit={handleEdit}
-            onForward={handleForward}
-          />
+          {selectedPerson && (
+            <ChatBox
+              details={selectedPerson.details}
+              chats={selectedPerson.chats}
+              chatContent={chatContent}
+              onAddChat={handleAddChat}
+              onKeyPress={handleKeyPress}
+              onChangeInput={handleChangeInput}
+              onCloseChat={handleCloseChat}
+              onDelete={handleDeleteChat}
+              onEdit={handleEdit}
+              onForward={handleForward}
+            />
+          )}
         </div>
       </div>
     </div>

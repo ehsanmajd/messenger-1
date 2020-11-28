@@ -1,6 +1,6 @@
 import React from "react";
 
-// nothing yet ...
+// nothing yet ... //TODO searchbar
 function SearchBar() {
   return (
     <div>

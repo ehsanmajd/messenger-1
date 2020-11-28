@@ -1,7 +1,6 @@
 import React from "react";
 
 function PersonListItem({
-  personId,
   avatar,
   personName,
   lastChatText,
@@ -12,10 +11,7 @@ function PersonListItem({
 }) {
   return (
     <>
-      <div
-        className="listItem_list-item__1mnZB"
-        onClick={() => onPersonClick(personId)}
-      >
+      <div className="listItem_list-item__1mnZB" onClick={onPersonClick}>
         <div className="listItem_avatar__FkMqU">
           <div className="avatar__avatar__oTaCM">
             <img src={avatar} alt={personName} />
