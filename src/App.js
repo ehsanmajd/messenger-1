@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
+//TODO add id maker for person item .
 
-import SearchBar from "./SearchBar";
-import PersonList from "./Components/person/PersonList";
+import { handleGetDate, handleGetTime } from "./modules";
+
+import SearchBar from "./Components/personList/SearchBar";
+import PersonList from "./Components/personList/PersonList";
 import ChatBox from "./Components/chat/ChatBox";
 
 function App() {
+  const [chatContent, setChatContent] = useState("");
   const [persons, setPersons] = useState([
     {
       details: {
@@ -266,9 +270,11 @@ function App() {
       ],
     },
   ]);
-  const [selectedPerson, setSelectedPerson] = useState(null);
-  const [chatContent, setChatContent] = useState("");
   const [personList, setPersonList] = useState(null);
+  const [selectedPerson, setSelectedPerson] = useState(null);
+  const SelectedPersonId = selectedPerson
+    ? selectedPerson.details.personId
+    : "/*person not selected*/";
 
   useEffect(() => {
     const list = persons.map((person) => ({
@@ -284,14 +290,33 @@ function App() {
     setPersonList(list);
   }, [persons]);
 
+  function handlePersonClick(personId) {
+    const copiedPersons = [...persons];
+    const index = copiedPersons.findIndex(
+      (person) => person.details.personId === personId
+    );
+    const details = { ...copiedPersons[index].details };
+    const chats = [...copiedPersons[index].chats];
+
+    if (details.unreadChatCounter) {
+      details.unreadChatCounter = "";
+    }
+    const newPerson = { details, chats };
+    copiedPersons.splice(index, 1, newPerson);
+
+    setChatContent("");
+    setPersons(copiedPersons);
+    setSelectedPerson(newPerson);
+  }
+
   function handleAddChat() {
-    //TODO selectedPerson.chats
     const copiedPersons = [...persons];
     const details = { ...selectedPerson.details };
     const chats = [...selectedPerson.chats];
     const index = copiedPersons.findIndex(
       (p) => p.details.personId === selectedPerson.details.personId
     );
+
     details.lastChatTime = handleGetTime();
     details.lastChatText = chatContent;
     chats.push({
@@ -301,86 +326,32 @@ function App() {
       chatId: Math.random(),
     });
     copiedPersons.splice(index, 1, { details, chats });
+
+    setChatContent("");
+    setPersons(copiedPersons);
     setSelectedPerson({ details, chats });
-    setPersons(copiedPersons);
-    setChatContent("");
-  }
-
-  function handleKeyPress(e) {
-    if (chatContent && e.key === "Enter") {
-      handleAddChat();
-    }
-    //TODO add another keyPress soon...
-  }
-
-  function handleChangeInput(e) {
-    setChatContent(e.target.value);
-  }
-
-  function handlePersonClick(personId) {
-    const copiedPersons = [...persons];
-    const index = copiedPersons.findIndex(
-      (person) => person.details.personId === personId
-    );
-    const details = { ...copiedPersons[index].details };
-    const chats = [...copiedPersons[index].chats];
-    if (details.unreadChatCounter) {
-      details.unreadChatCounter = "";
-    }
-    const newPerson = { details, chats };
-    copiedPersons.splice(index, 1, newPerson);
-
-    setSelectedPerson(newPerson);
-    setPersons(copiedPersons);
-    setChatContent("");
-    //TODO fix chatContent
-  }
-
-  function handleCloseChat() {
-    setChatContent("");
-    setSelectedPerson(null);
-  }
-
-  function handleGetTime() {
-    const dateNow = new Date(Date.now());
-    const getHours = dateNow.getHours();
-    const getMinutes = dateNow.getMinutes();
-    return `${getHours}:${getMinutes}`;
-  }
-
-  function handleGetDate() {
-    // handleTime("getMonth", "getDay", "/");
-    const dateNow = new Date(Date.now());
-    const getMonth = dateNow.getMonth();
-    const getDay = dateNow.getDay();
-    return `${getMonth + 1}/${getDay + 22}`;
   }
 
   function handleDeleteChat(chatId) {
-    let copiedPersons = [...persons];
-    const personDetails = { ...selectedPerson.details };
-    const newChats = selectedPerson.chats.filter(
-      (chat) => chat.chatId !== chatId
-    );
+    const copiedPersons = [...persons];
+    const details = { ...selectedPerson.details };
+    const chats = selectedPerson.chats.filter((chat) => chat.chatId !== chatId);
     const personIndex = copiedPersons.findIndex(
       (p) => p.details.personId === selectedPerson.details.personId
     );
-    if (newChats.length) {
-      const chatLastIndex = newChats.length - 1;
-      personDetails.lastChatTime = newChats[chatLastIndex].chatTime;
-      if (newChats[chatLastIndex].me) {
-        personDetails.lastChatText = newChats[chatLastIndex].me;
-      }
-      if (newChats[chatLastIndex].person) {
-        personDetails.lastChatText = newChats[chatLastIndex].person;
-      }
-      copiedPersons.splice(personIndex, 1, {
-        details: personDetails,
-        chats: newChats,
-      });
-      setSelectedPerson({ details: personDetails, chats: newChats });
-    }
-    if (!newChats.length) {
+
+    if (chats.length) {
+      const chatsLastIndex = chats.length - 1;
+      details.lastChatTime = chats[chatsLastIndex].chatTime;
+
+      chats[chatsLastIndex].me
+        ? (details.lastChatText = chats[chatsLastIndex].me)
+        : (details.lastChatText = chats[chatsLastIndex].person);
+
+      const newPerson = { details, chats };
+      copiedPersons.splice(personIndex, 1, newPerson);
+      setSelectedPerson(newPerson);
+    } else {
       copiedPersons.splice(personIndex, 1);
       handleCloseChat();
     }
@@ -388,19 +359,24 @@ function App() {
     setPersons(copiedPersons);
   }
 
-  function handleEdit(chatId, personId) {
-    console.log("chat id :", chatId, "personId", personId);
-  }
+  function handleEdit(chatId, personId) {}
 
   function handleForward(chatId) {}
 
-  // TODO 2 in 1 time geter
-  // function handleTime(timeParams1, timeParams2, timeType) {
-  //   const dateNow = new Date(Date.now());
-  //   timeParams1 = dateNow.timeParams1();
-  //   timeParams2 = dateNow.timeParams2();
-  //   return `${timeParams1}${timeType}${timeParams2}`;
-  // }
+  function handleKeyPress(e) {
+    if (chatContent && e.key === "Enter") {
+      handleAddChat();
+    }
+  }
+
+  function handleChangeInput(e) {
+    setChatContent(e.target.value);
+  }
+
+  function handleCloseChat() {
+    setChatContent("");
+    setSelectedPerson(null);
+  }
 
   if (!personList) {
     return "please wait ...";
@@ -414,6 +390,7 @@ function App() {
           <div className="chat_side__2kvyI">
             <SearchBar />
             <PersonList
+              SelectedPersonId={SelectedPersonId}
               personList={personList}
               onPersonClick={handlePersonClick}
             />

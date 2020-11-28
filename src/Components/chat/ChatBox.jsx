@@ -27,14 +27,12 @@ function ChatBox({
         style={{ backgroundColor: "lighcyan" }}
         className="chatDetail_chat-box__3peJu"
       >
-        <ul className="chatDetail_messages-panel__3aOw8">
-          <ChatMapper
-            chats={chats}
-            onDelete={onDelete}
-            onEdit={onEdit}
-            onForward={onForward}
-          />
-        </ul>
+        <ChatMapper
+          chats={chats}
+          onDelete={onDelete}
+          onEdit={onEdit}
+          onForward={onForward}
+        />
         <ChatInput
           chatContent={chatContent}
           onAddChat={onAddChat}

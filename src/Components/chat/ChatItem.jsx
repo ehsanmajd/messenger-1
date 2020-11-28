@@ -16,13 +16,14 @@ const Button = ({ text, event }) => (
 function chatItem({
   me,
   person,
-  chatDate,
   chatTime,
+  chatDate,
   onDelete,
   onEdit,
   onForward,
 }) {
-  // message className from Haleh .
+  // "message" classNames from Haleh <3 .
+  //TODO cleanup
   return (
     <>
       {me && (
@@ -42,7 +43,7 @@ function chatItem({
       )}
       {person && (
         <>
-          <div className="hoverItem">
+          <div>
             <li
               style={{
                 display: "block",

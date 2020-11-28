@@ -6,8 +6,8 @@ function ChatMapper({ chats, onDelete, onEdit, onForward }) {
   const mappedChat = chats.map((chat) => (
     <ChatItem
       key={chat.chatId}
-      me={chat.me} // کاربر پیام رسان
-      person={chat.person} // شخص مقابل
+      me={chat.me}
+      person={chat.person}
       chatTime={chat.chatTime}
       chatDate={chat.chatDate}
       onDelete={() => onDelete(chat.chatId)}
@@ -15,7 +15,7 @@ function ChatMapper({ chats, onDelete, onEdit, onForward }) {
       onForward={() => onForward(chat.chatId)}
     />
   ));
-  return <>{mappedChat}</>;
+  return <ul className="chatDetail_messages-panel__3aOw8">{mappedChat}</ul>;
 }
 
 export default ChatMapper;
