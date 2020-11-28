@@ -1,5 +1,7 @@
 import React from "react";
 
+import { handleGetDate, handleGetTime } from "../../modules";
+
 import ChatItem from "./ChatItem";
 
 function ChatMapper({ chats, onDelete, onEdit, onForward }) {
@@ -8,8 +10,8 @@ function ChatMapper({ chats, onDelete, onEdit, onForward }) {
       key={chat.chatId}
       me={chat.me}
       person={chat.person}
-      chatTime={chat.chatTime}
-      chatDate={chat.chatDate}
+      chatTime={handleGetTime(chat.chatTime)}
+      chatDate={handleGetDate(chat.chatTime)}
       onDelete={() => onDelete(chat.chatId)}
       onEdit={() => onEdit(chat.chatId)}
       onForward={() => onForward(chat.chatId)}

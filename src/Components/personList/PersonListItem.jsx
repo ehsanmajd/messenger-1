@@ -7,7 +7,6 @@ function PersonListItem({
   personName,
   lastChatText,
   lastChatTime,
-  // lastChatDate,
   unreadChatCounter,
   onPersonClick,
 }) {
