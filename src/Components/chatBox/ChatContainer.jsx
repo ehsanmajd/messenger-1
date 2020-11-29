@@ -4,9 +4,8 @@ import ChatInput from "./ChatInput";
 import ChatMapper from "./ChatMapper";
 import ChatTitleBar from "./ChatTitleBar";
 
-function ChatBox({
-  details,
-  chats,
+function ChatContainer({
+  selectedPerson,
   chatContent,
   onAddChat,
   onKeyPress,
@@ -19,8 +18,8 @@ function ChatBox({
   return (
     <div>
       <ChatTitleBar
-        avatar={details.avatar}
-        personName={details.personName}
+        avatar={selectedPerson.details.avatar}
+        personName={selectedPerson.details.personName}
         onCloseChat={onCloseChat}
       />
       <div
@@ -28,7 +27,7 @@ function ChatBox({
         className="chatDetail_chat-box__3peJu"
       >
         <ChatMapper
-          chats={chats}
+          chats={selectedPerson.chats}
           onDelete={onDelete}
           onEdit={onEdit}
           onForward={onForward}
@@ -44,4 +43,4 @@ function ChatBox({
   );
 }
 
-export default ChatBox;
+export default ChatContainer;

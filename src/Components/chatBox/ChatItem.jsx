@@ -1,17 +1,5 @@
 import React from "react";
-
-const Button = ({ text, event }) => (
-  <button
-    style={{
-      width: "fit-content",
-      height: "30px",
-      fontSize: "25px",
-    }}
-    onClick={event}
-  >
-    {text}
-  </button>
-);
+import Buttons from "../Others/Buttons";
 
 function chatItem({
   me,
@@ -23,7 +11,28 @@ function chatItem({
   onForward,
 }) {
   // "message" classNames from Haleh <3 .
-  //TODO cleanup
+
+  const style = {
+    width: "fit-content",
+    height: "30px",
+    fontSize: "25px",
+  };
+
+  const values = [
+    { text: "Delete", event: onDelete, style: style },
+    { text: "Edit", event: onEdit, style: style },
+    { text: "Forward", event: onForward, style: style },
+  ];
+
+  const listStyle = {
+    display: "block",
+    width: "fit-content",
+    padding: "10px",
+    border: "1px black solid",
+    borderRadius: "15px 15px 15px 0",
+    fontSize: "1.6rem",
+  };
+
   return (
     <>
       {me && (
@@ -31,9 +40,7 @@ function chatItem({
           <div className="message-content">
             <div className="message-text">
               <li className="chatDetail_me__2ZOxv">{me}</li>
-              <Button text="Delete" event={onDelete} />
-              <Button text="Edit" event={onEdit} />
-              <Button text="Forward" event={onForward} />
+              <Buttons values={values} />
             </div>
             <div className="message-time">
               {chatDate} {chatTime}
@@ -44,22 +51,9 @@ function chatItem({
       {person && (
         <>
           <div>
-            <li
-              style={{
-                display: "block",
-                width: "fit-content",
-                padding: "10px",
-                border: "1px black solid",
-                borderRadius: "15px 15px 15px 0",
-                fontSize: "1.6rem",
-              }}
-            >
+            <li style={listStyle}>
               {person}
-              <div>
-                <Button text="Delete" event={onDelete} />
-                <Button text="Edit" event={onEdit} />
-                <Button text="Forward" event={onForward} />
-              </div>
+              <Buttons values={values} />
             </li>
           </div>
           <div className="message-time">

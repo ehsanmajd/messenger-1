@@ -4,7 +4,7 @@ import { idMaker } from "./modules";
 
 import SearchBar from "./Components/personList/SearchBar";
 import PersonList from "./Components/personList/PersonList";
-import ChatBox from "./Components/chatBox/ChatBox";
+import ChatContainer from "./Components/chatBox/ChatContainer";
 
 function App() {
   const [chatContent, setChatContent] = useState("");
@@ -311,12 +311,10 @@ function App() {
   function handleForward(chatId) {}
 
   function handleSortPersons(copiedPersons) {
-    copiedPersons.sort((a, b) => {
-      return (
+    return copiedPersons.sort(
+      (a, b) =>
         new Date(b.details.lastChatTime) - new Date(a.details.lastChatTime)
-      );
-    });
-    return copiedPersons;
+    );
   }
 
   function handleKeyPress(e) {
@@ -348,9 +346,8 @@ function App() {
             />
           </div>
           {selectedPerson && (
-            <ChatBox
-              details={selectedPerson.details}
-              chats={selectedPerson.chats}
+            <ChatContainer
+              selectedPerson={selectedPerson}
               chatContent={chatContent}
               onAddChat={handleAddChat}
               onKeyPress={handleKeyPress}
