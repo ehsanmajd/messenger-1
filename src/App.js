@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { idMaker } from "./modules";
 
@@ -234,24 +234,10 @@ function App() {
       ],
     },
   ]);
-  const [personList, setPersonList] = useState(null);
   const [selectedPerson, setSelectedPerson] = useState(null);
   const SelectedPersonId = selectedPerson
     ? selectedPerson.details.personId
     : "/*person not selected*/";
-
-  useEffect(() => {
-    const list = persons.map((person) => ({
-      avatar: person.details.avatar,
-      alt: person.details.alt,
-      personName: person.details.personName,
-      lastChatText: person.details.lastChatText,
-      lastChatTime: person.details.lastChatTime,
-      unreadChatCounter: person.details.unreadChatCounter,
-      personId: person.details.personId,
-    }));
-    setPersonList(list);
-  }, [persons]);
 
   function handlePersonClick(personId) {
     const copiedPersons = [...persons];
@@ -348,10 +334,6 @@ function App() {
     setSelectedPerson(null);
   }
 
-  if (!personList) {
-    return "please wait ...";
-  }
-
   return (
     <div className="app_app__3mk8F">
       <div className="app_head__1Nu6Y"></div>
@@ -361,7 +343,7 @@ function App() {
             <SearchBar />
             <PersonList
               SelectedPersonId={SelectedPersonId}
-              personList={personList}
+              persons={persons}
               onPersonClick={handlePersonClick}
             />
           </div>

@@ -4,19 +4,19 @@ import PersonListItem from "./PersonListItem";
 
 import { handleGetTime } from "../../modules";
 
-function PersonList({ personList, SelectedPersonId, onPersonClick }) {
-  const list = personList.map((person) => {
+function PersonList({ persons, SelectedPersonId, onPersonClick }) {
+  const list = persons.map((person) => {
     return (
       <PersonListItem
-        key={person.personId}
-        personId={person.personId}
+        key={person.details.personId}
+        personId={person.details.personId}
         SelectedPersonId={SelectedPersonId}
-        avatar={person.avatar}
-        personName={person.personName}
-        lastChatText={person.lastChatText}
-        lastChatTime={handleGetTime(person.lastChatTime)}
-        unreadChatCounter={person.unreadChatCounter}
-        onPersonClick={() => onPersonClick(person.personId)}
+        avatar={person.details.avatar}
+        personName={person.details.personName}
+        lastChatText={person.details.lastChatText}
+        lastChatTime={handleGetTime(person.details.lastChatTime)}
+        unreadChatCounter={person.details.unreadChatCounter}
+        onPersonClick={() => onPersonClick(person.details.personId)}
       />
     );
   });
