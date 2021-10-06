@@ -2,7 +2,7 @@ const { exec, spawnSync } = require('child_process');
 const { promisify } = require('util');
 const { EOL } = require('os')
 
-const MASTER_BRANCH = 'master';
+const MASTER_BRANCH = 'main';
 
 const removeEOL = phrase => {
   const index = phrase.indexOf(EOL);
